@@ -1,0 +1,20 @@
+version: '3.6'
+services:
+  nginx:
+    image: emcniece/nginx-cache-purge
+    restart: always
+    depends_on:
+      - imager
+    volumes:
+    - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+    - "8080:80"
+    - "80:80"
+
+  imager:
+    build: ./imager
+    restart: always
+    volumes:
+      - ./imager:/imager
+    ports:
+      - 3002:3002
